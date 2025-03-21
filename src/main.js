@@ -23,7 +23,7 @@ async function start() {
   };
 
   // Set up Stripe.js and Elements to use in checkout form.
-  const elements = stripe.elements({ paymentMethodTypes: ['card'] });
+  const elements = stripe.elements(options);
 
   const expressCheckoutElement = elements.create('expressCheckout', {
     paymentMethods: {
@@ -45,7 +45,6 @@ async function start() {
     currency: 'usd',
     // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
     automatic_payment_methods: { enabled: true },
-    payment,
   });
 
   const handleError = (error) => {
