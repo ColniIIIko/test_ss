@@ -19,6 +19,7 @@ async function start() {
     appearance: {
       /*...*/
     },
+    paymentMethodTypes: ['card'],
   };
 
   // Set up Stripe.js and Elements to use in checkout form.
