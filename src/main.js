@@ -19,7 +19,6 @@ async function start() {
     appearance: {
       /*...*/
     },
-    paymentMethodTypes: ['card'],
   };
 
   // Set up Stripe.js and Elements to use in checkout form.
@@ -43,7 +42,7 @@ async function start() {
     amount: 1099,
     currency: 'usd',
     // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-    automatic_payment_methods: { enabled: false },
+    automatic_payment_methods: { enabled: true },
   });
 
   const handleError = (error) => {
@@ -51,7 +50,7 @@ async function start() {
     messageContainer.textContent = error.message;
   };
 
-  expressCheckoutElement.on('cancel', () => {});
+  expressCheckoutElement.on('loaderror', (e) => console.log(e));
 
   expressCheckoutElement.on('confirm', async (event) => {
     const { error: submitError } = await elements.submit();
