@@ -44,7 +44,7 @@ async function start() {
     amount: 1099,
     currency: 'usd',
     // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-    automatic_payment_methods: { enabled: true },
+    automatic_payment_methods: { enabled: false },
   });
 
   const handleError = (error) => {
