@@ -29,7 +29,6 @@ async function start() {
     paymentMethods: {
       googlePay: 'always',
     },
-    paymentMethodTypes: ['card'],
   });
   expressCheckoutElement.mount('#app');
 
