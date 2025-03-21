@@ -81,7 +81,7 @@ async function start() {
     } else {
       document.querySelector(
         '#aaa'
-      ).innerHTML = `Success Payment: ${paymentIntent.status}`;
+      ).innerHTML = `<p>Success Payment: ${paymentIntent.status}</p>`;
       console.log(paymentIntent);
     }
   });
