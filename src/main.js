@@ -24,7 +24,11 @@ async function start() {
   // Set up Stripe.js and Elements to use in checkout form.
   const elements = stripe.elements(options);
 
-  const expressCheckoutElement = elements.create('expressCheckout');
+  const expressCheckoutElement = elements.create('expressCheckout', {
+    paymentMethods: {
+      googlePay: 'always',
+    },
+  });
   expressCheckoutElement.mount('#app');
 
   const customer = await stripeServ.customers.create({
