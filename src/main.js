@@ -23,12 +23,13 @@ async function start() {
   };
 
   // Set up Stripe.js and Elements to use in checkout form.
-  const elements = stripe.elements(options);
+  const elements = stripe.elements({ paymentMethodTypes: ['card'] });
 
   const expressCheckoutElement = elements.create('expressCheckout', {
     paymentMethods: {
       googlePay: 'always',
     },
+    paymentMethodTypes: ['card'],
   });
   expressCheckoutElement.mount('#app');
 
@@ -44,12 +45,15 @@ async function start() {
     currency: 'usd',
     // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
     automatic_payment_methods: { enabled: true },
+    payment,
   });
 
   const handleError = (error) => {
     const messageContainer = document.querySelector('#error-message');
     messageContainer.textContent = error.message;
   };
+
+  expressCheckoutElement.on('cancel', () => {});
 
   expressCheckoutElement.on('confirm', async (event) => {
     const { error: submitError } = await elements.submit();
@@ -76,6 +80,9 @@ async function start() {
       // confirming the payment. Show the error to your customer (for example, payment details incomplete)
       handleError(error);
     } else {
+      document.querySelector(
+        '#aaa'
+      ).innerHTML = `Success Payment: ${paymentIntent.status}`;
       console.log(paymentIntent);
     }
   });
